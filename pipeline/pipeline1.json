@@ -15,14 +15,24 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"command": "java -jar https://adfspikestorageaccount.blob.core.windows.net/adf-spike-container/spring-batch-1.0.0.jar\n",
+					"command": "cmd /C java -jar spring-batch-1.0.0.jar",
+					"resourceLinkedService": {
+						"referenceName": "AzureBlobStorageCSVFiles",
+						"type": "LinkedServiceReference"
+					},
+					"folderPath": "adf-spike-csv-storage",
 					"referenceObjects": {
-						"linkedServices": [],
+						"linkedServices": [
+							{
+								"referenceName": "AzureBlobStorageCSVFiles",
+								"type": "LinkedServiceReference"
+							}
+						],
 						"datasets": []
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "AzureBatchLinkedService",
+					"referenceName": "AzureBatch1",
 					"type": "LinkedServiceReference"
 				}
 			}

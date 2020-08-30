@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "CSVtoSQL1",
+				"name": "CSVtoSQL",
 				"type": "Custom",
 				"dependsOn": [],
 				"policy": {

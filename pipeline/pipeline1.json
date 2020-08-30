@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Custom1",
+				"name": "CSVtoSQL",
 				"type": "Custom",
 				"dependsOn": [],
 				"policy": {
@@ -17,10 +17,10 @@
 				"typeProperties": {
 					"command": "cmd /C java -jar spring-batch-1.0.0.jar",
 					"resourceLinkedService": {
-						"referenceName": "AzureBlobStorageCSVFiles",
+						"referenceName": "AzureBlobStorage2",
 						"type": "LinkedServiceReference"
 					},
-					"folderPath": "adf-spike-csv-storage",
+					"folderPath": "adf-spike-container",
 					"referenceObjects": {
 						"linkedServices": [],
 						"datasets": []

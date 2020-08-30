@@ -8,7 +8,8 @@
 				"pipelineReference": {
 					"referenceName": "pipeline1",
 					"type": "PipelineReference"
-				}
+				},
+				"parameters": {}
 			}
 		],
 		"type": "BlobEventsTrigger",

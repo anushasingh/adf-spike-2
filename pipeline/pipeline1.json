@@ -22,12 +22,7 @@
 					},
 					"folderPath": "adf-spike-csv-storage",
 					"referenceObjects": {
-						"linkedServices": [
-							{
-								"referenceName": "AzureBlobStorageCSVFiles",
-								"type": "LinkedServiceReference"
-							}
-						],
+						"linkedServices": [],
 						"datasets": []
 					}
 				},

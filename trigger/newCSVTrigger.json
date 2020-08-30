@@ -14,7 +14,7 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/adf-spike-container/blobs/users",
+			"blobPathBeginsWith": "/adf-spike-container/blobs/",
 			"blobPathEndsWith": ".csv",
 			"ignoreEmptyBlobs": true,
 			"scope": "/subscriptions/cea60126-7f64-4b7d-9722-717b145cc99f/resourceGroups/adf-spike/providers/Microsoft.Storage/storageAccounts/adfspikestorageaccount",

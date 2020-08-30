@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "adf-spike"
 		},
+		"AzureBatch1_accessKey": {
+			"value": ""
+		},
 		"AzureBatchLinkedService_accessKey": {
 			"value": ""
 		},
@@ -14,20 +17,8 @@
 		"AzureBlobStorage2_connectionString": {
 			"value": ""
 		},
-		"AzureBatch1_accessKey": {
-			"value": ""
-		},
 		"AzureBlobStorageCSVFiles_connectionString": {
 			"value": ""
-		},
-		"AzureBatchLinkedService_properties_typeProperties_accountName": {
-			"value": "adfspike"
-		},
-		"AzureBatchLinkedService_properties_typeProperties_batchUri": {
-			"value": "https://adfspike.southeastasia.batch.azure.com"
-		},
-		"AzureBatchLinkedService_properties_typeProperties_poolName": {
-			"value": "adfspikepool"
 		},
 		"AzureBatch1_properties_typeProperties_accountName": {
 			"value": "adfspike"
@@ -37,6 +28,15 @@
 		},
 		"AzureBatch1_properties_typeProperties_poolName": {
 			"value": "pool1test"
+		},
+		"AzureBatchLinkedService_properties_typeProperties_accountName": {
+			"value": "adfspike"
+		},
+		"AzureBatchLinkedService_properties_typeProperties_batchUri": {
+			"value": "https://adfspike.southeastasia.batch.azure.com"
+		},
+		"AzureBatchLinkedService_properties_typeProperties_poolName": {
+			"value": "adfspikepool"
 		},
 		"newCSVTrigger_properties_typeProperties_scope": {
 			"value": "/subscriptions/cea60126-7f64-4b7d-9722-717b145cc99f/resourceGroups/adf-spike/providers/Microsoft.Storage/storageAccounts/adfspikestorageaccount"

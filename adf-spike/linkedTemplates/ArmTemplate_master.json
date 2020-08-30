@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-spike"
 		},
+		"AzureBatch1_accessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessKey' of 'AzureBatch1'"
+		},
 		"AzureBatchLinkedService_accessKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accessKey' of 'AzureBatchLinkedService'"
@@ -19,25 +23,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
 		},
-		"AzureBatch1_accessKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accessKey' of 'AzureBatch1'"
-		},
 		"AzureBlobStorageCSVFiles_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageCSVFiles'"
-		},
-		"AzureBatchLinkedService_properties_typeProperties_accountName": {
-			"type": "string",
-			"defaultValue": "adfspike"
-		},
-		"AzureBatchLinkedService_properties_typeProperties_batchUri": {
-			"type": "string",
-			"defaultValue": "https://adfspike.southeastasia.batch.azure.com"
-		},
-		"AzureBatchLinkedService_properties_typeProperties_poolName": {
-			"type": "string",
-			"defaultValue": "adfspikepool"
 		},
 		"AzureBatch1_properties_typeProperties_accountName": {
 			"type": "string",
@@ -50,6 +38,18 @@
 		"AzureBatch1_properties_typeProperties_poolName": {
 			"type": "string",
 			"defaultValue": "pool1test"
+		},
+		"AzureBatchLinkedService_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "adfspike"
+		},
+		"AzureBatchLinkedService_properties_typeProperties_batchUri": {
+			"type": "string",
+			"defaultValue": "https://adfspike.southeastasia.batch.azure.com"
+		},
+		"AzureBatchLinkedService_properties_typeProperties_poolName": {
+			"type": "string",
+			"defaultValue": "adfspikepool"
 		},
 		"newCSVTrigger_properties_typeProperties_scope": {
 			"type": "string",
@@ -91,20 +91,11 @@
 					"AzureBlobStorageCSVFiles_connectionString": {
 						"value": "[parameters('AzureBlobStorageCSVFiles_connectionString')]"
 					},
-					"AzureBatchLinkedService_accessKey": {
-						"value": "[parameters('AzureBatchLinkedService_accessKey')]"
-					},
 					"AzureBatch1_accessKey": {
 						"value": "[parameters('AzureBatch1_accessKey')]"
 					},
-					"AzureBatchLinkedService_properties_typeProperties_accountName": {
-						"value": "[parameters('AzureBatchLinkedService_properties_typeProperties_accountName')]"
-					},
-					"AzureBatchLinkedService_properties_typeProperties_batchUri": {
-						"value": "[parameters('AzureBatchLinkedService_properties_typeProperties_batchUri')]"
-					},
-					"AzureBatchLinkedService_properties_typeProperties_poolName": {
-						"value": "[parameters('AzureBatchLinkedService_properties_typeProperties_poolName')]"
+					"AzureBatchLinkedService_accessKey": {
+						"value": "[parameters('AzureBatchLinkedService_accessKey')]"
 					},
 					"AzureBatch1_properties_typeProperties_accountName": {
 						"value": "[parameters('AzureBatch1_properties_typeProperties_accountName')]"
@@ -114,6 +105,15 @@
 					},
 					"AzureBatch1_properties_typeProperties_poolName": {
 						"value": "[parameters('AzureBatch1_properties_typeProperties_poolName')]"
+					},
+					"AzureBatchLinkedService_properties_typeProperties_accountName": {
+						"value": "[parameters('AzureBatchLinkedService_properties_typeProperties_accountName')]"
+					},
+					"AzureBatchLinkedService_properties_typeProperties_batchUri": {
+						"value": "[parameters('AzureBatchLinkedService_properties_typeProperties_batchUri')]"
+					},
+					"AzureBatchLinkedService_properties_typeProperties_poolName": {
+						"value": "[parameters('AzureBatchLinkedService_properties_typeProperties_poolName')]"
 					},
 					"newCSVTrigger_properties_typeProperties_scope": {
 						"value": "[parameters('newCSVTrigger_properties_typeProperties_scope')]"

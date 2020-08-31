@@ -30,6 +30,42 @@
 					"referenceName": "AzureBatch1",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Aggregate",
+				"type": "HDInsightSpark",
+				"dependsOn": [
+					{
+						"activity": "CSVtoSQL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"rootPath": "adfspikehdinsightcluste-2020-08-31t15-24-53-383z",
+					"entryFilePath": "adf-demo-agg-1.0-SNAPSHOT-jar-with-dependencies.jar",
+					"className": "com.adfdemo.spark.App",
+					"sparkConfig": {
+						"master": "yarn"
+					},
+					"sparkJobLinkedService": {
+						"referenceName": "AzureBlobStorageHDInsight",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "linkedServiceHDInsight",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []

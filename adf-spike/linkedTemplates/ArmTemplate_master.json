@@ -23,9 +23,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
 		},
+		"AzureBlobStorage3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
+		},
 		"AzureBlobStorageCSVFiles_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageCSVFiles'"
+		},
+		"linkedServiceHDInsight_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'linkedServiceHDInsight'"
+		},
+		"AzureBlobStorageHDInsight_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageHDInsight'"
 		},
 		"AzureBatch1_properties_typeProperties_accountName": {
 			"type": "string",
@@ -50,6 +62,10 @@
 		"AzureBatchLinkedService_properties_typeProperties_poolName": {
 			"type": "string",
 			"defaultValue": "adfspikepool"
+		},
+		"linkedServiceHDInsight_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin"
 		},
 		"newCSVTrigger_properties_typeProperties_scope": {
 			"type": "string",
@@ -88,14 +104,23 @@
 					"AzureBlobStorage2_connectionString": {
 						"value": "[parameters('AzureBlobStorage2_connectionString')]"
 					},
+					"AzureBlobStorage3_connectionString": {
+						"value": "[parameters('AzureBlobStorage3_connectionString')]"
+					},
 					"AzureBlobStorageCSVFiles_connectionString": {
 						"value": "[parameters('AzureBlobStorageCSVFiles_connectionString')]"
+					},
+					"AzureBlobStorageHDInsight_connectionString": {
+						"value": "[parameters('AzureBlobStorageHDInsight_connectionString')]"
 					},
 					"AzureBatch1_accessKey": {
 						"value": "[parameters('AzureBatch1_accessKey')]"
 					},
 					"AzureBatchLinkedService_accessKey": {
 						"value": "[parameters('AzureBatchLinkedService_accessKey')]"
+					},
+					"linkedServiceHDInsight_password": {
+						"value": "[parameters('linkedServiceHDInsight_password')]"
 					},
 					"AzureBatch1_properties_typeProperties_accountName": {
 						"value": "[parameters('AzureBatch1_properties_typeProperties_accountName')]"
@@ -114,6 +139,9 @@
 					},
 					"AzureBatchLinkedService_properties_typeProperties_poolName": {
 						"value": "[parameters('AzureBatchLinkedService_properties_typeProperties_poolName')]"
+					},
+					"linkedServiceHDInsight_properties_typeProperties_userName": {
+						"value": "[parameters('linkedServiceHDInsight_properties_typeProperties_userName')]"
 					},
 					"newCSVTrigger_properties_typeProperties_scope": {
 						"value": "[parameters('newCSVTrigger_properties_typeProperties_scope')]"

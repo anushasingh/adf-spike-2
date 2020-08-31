@@ -15,9 +15,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
 		},
+		"AzureBlobStorage3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
+		},
 		"AzureBlobStorageCSVFiles_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageCSVFiles'"
+		},
+		"AzureBlobStorageHDInsight_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageHDInsight'"
 		},
 		"AzureBatch1_accessKey": {
 			"type": "secureString",
@@ -26,6 +34,10 @@
 		"AzureBatchLinkedService_accessKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accessKey' of 'AzureBatchLinkedService'"
+		},
+		"linkedServiceHDInsight_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'linkedServiceHDInsight'"
 		},
 		"AzureBatch1_properties_typeProperties_accountName": {
 			"type": "string",
@@ -50,6 +62,10 @@
 		"AzureBatchLinkedService_properties_typeProperties_poolName": {
 			"type": "string",
 			"defaultValue": "adfspikepool"
+		},
+		"linkedServiceHDInsight_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin"
 		},
 		"newCSVTrigger_properties_typeProperties_scope": {
 			"type": "string",
@@ -87,6 +103,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage3_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorageCSVFiles')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -95,6 +124,19 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureBlobStorageCSVFiles_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorageHDInsight')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorageHDInsight_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -150,13 +192,38 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/linkedServiceHDInsight')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HDInsight",
+				"typeProperties": {
+					"clusterUri": "https://adfspikehdinsightcluster1.azurehdinsight.net",
+					"userName": "[parameters('linkedServiceHDInsight_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('linkedServiceHDInsight_password')]"
+					},
+					"isEspEnabled": false,
+					"linkedServiceName": {
+						"referenceName": "AzureBlobStorageHDInsight",
+						"type": "LinkedServiceReference"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageHDInsight')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "CSVtoSQL1",
+						"name": "CSVtoSQL",
 						"type": "Custom",
 						"dependsOn": [],
 						"policy": {
@@ -183,13 +250,51 @@
 							"referenceName": "AzureBatch1",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Aggregate",
+						"type": "HDInsightSpark",
+						"dependsOn": [
+							{
+								"activity": "CSVtoSQL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"rootPath": "adfspikehdinsightcluste-2020-08-31t15-24-53-383z",
+							"entryFilePath": "adf-demo-agg-1.0-SNAPSHOT-jar-with-dependencies.jar",
+							"className": "com.adfdemo.spark.App",
+							"sparkConfig": {
+								"master": "yarn"
+							},
+							"sparkJobLinkedService": {
+								"referenceName": "AzureBlobStorageHDInsight",
+								"type": "LinkedServiceReference"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "linkedServiceHDInsight",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage2')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBatch1')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureBatch1')]",
+				"[concat(variables('factoryId'), '/linkedServices/linkedServiceHDInsight')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageHDInsight')]"
 			]
 		},
 		{
@@ -210,7 +315,7 @@
 				],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"blobPathBeginsWith": "/adf-spike-container/blobs/users",
+					"blobPathBeginsWith": "/adf-spike-container/blobs/",
 					"blobPathEndsWith": ".csv",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('newCSVTrigger_properties_typeProperties_scope')]",

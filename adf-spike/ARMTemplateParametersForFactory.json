@@ -17,7 +17,16 @@
 		"AzureBlobStorage2_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage3_connectionString": {
+			"value": ""
+		},
 		"AzureBlobStorageCSVFiles_connectionString": {
+			"value": ""
+		},
+		"linkedServiceHDInsight_password": {
+			"value": ""
+		},
+		"AzureBlobStorageHDInsight_connectionString": {
 			"value": ""
 		},
 		"AzureBatch1_properties_typeProperties_accountName": {
@@ -37,6 +46,9 @@
 		},
 		"AzureBatchLinkedService_properties_typeProperties_poolName": {
 			"value": "adfspikepool"
+		},
+		"linkedServiceHDInsight_properties_typeProperties_userName": {
+			"value": "admin"
 		},
 		"newCSVTrigger_properties_typeProperties_scope": {
 			"value": "/subscriptions/cea60126-7f64-4b7d-9722-717b145cc99f/resourceGroups/adf-spike/providers/Microsoft.Storage/storageAccounts/adfspikestorageaccount"
